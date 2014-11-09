@@ -1,9 +1,9 @@
 /*
-  Debounce.cpp - v1.0
+  Debounce.cpp - v1.0.1 - November 09, 2014.
   Library for button debouncing.
   Clearly based on the debounce example from the site:
   http://arduino.cc/en/Tutorial/Debounce
-  Created by William Koch, November 06, 2014.
+  Created by William Koch.
   Released into the public domain.
 */
 
@@ -23,10 +23,12 @@ class Debounce {
     Debounce(byte button, unsigned long delay);
 
     byte read(); // returns the debounced button state: LOW or HIGH.
+    unsigned int count(); // Returns the number of times the button was pressed.
   private:
     byte _button, _state, _lastState, _reading;
+    unsigned int _count;
     unsigned long _delay, _last;
-    boolean _active;
+    boolean _wait;
 };
 
 #endif

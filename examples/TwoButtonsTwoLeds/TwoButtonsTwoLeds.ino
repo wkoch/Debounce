@@ -21,5 +21,5 @@ void setup() {
 
 void loop() {
   digitalWrite(led1, !Button1.read()); // Negated value because of the PULLUP.
-  digitalWrite(led2, Button2.read()); // Direct value gives inverted results.
+  digitalWrite(led2, Button2.count() % 2);// On/Off each press.
 }

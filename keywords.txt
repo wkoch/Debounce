@@ -4,4 +4,5 @@ Debounce  KEYWORD1
 
 # Methods and Functions
 
-read   KEYWORD2
+read      KEYWORD2
+count     KEYWORD2
