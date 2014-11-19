@@ -1,6 +1,6 @@
 /*
-  Debounce.cpp - v1.0.1 - November 09, 2014.
-  Library for button debouncing.
+  Debounce - v1.1 - November 19, 2014.
+  Arduino library for button debouncing.
   Clearly based on the debounce example from the site:
   http://arduino.cc/en/Tutorial/Debounce
   Created by William Koch.
