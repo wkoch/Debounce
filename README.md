@@ -53,3 +53,7 @@ This will turn the led only when the button has been pressed and released 5 time
     } else {
       digitalWrite(13, LOW);
     }
+    
+### resetCount()
+
+Resets the counter for the button changes.

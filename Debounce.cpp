@@ -52,3 +52,8 @@ unsigned int Debounce::count() {
   Debounce::read();
   return _count/2; // Counts only a full press + release.
 }
+
+void Debounce::resetCount() {
+  _count = 0;
+  return;
+}
