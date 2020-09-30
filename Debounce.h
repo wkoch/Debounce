@@ -12,24 +12,26 @@
 
 #include "Arduino.h"
 
-class Debounce {
-  public:
-    // Debounces an input pin.
-    // 50ms as default debounce delay.
-    Debounce(byte button);
+class Debounce
+{
+public:
+  // Debounces an input pin.
+  // 50ms as default debounce delay.
+  Debounce(byte button, boolean invert = false, boolean pullup = false);
 
-    // Debounces an input pin.
-    // Adjustable debounce delay.
-    Debounce(byte button, unsigned long delay);
+  // Debounces an input pin.
+  // Adjustable debounce delay.
+  Debounce(byte button, unsigned long delay, boolean invert = false, boolean pullup = false);
 
-    byte read(); // returns the debounced button state: LOW or HIGH.
-    unsigned int count(); // Returns the number of times the button was pressed.
-    void resetCount(); // Resets the button count number. 
-  private:
-    byte _button, _state, _lastState, _reading;
-    unsigned int _count;
-    unsigned long _delay, _last;
-    boolean _wait;
+  byte read();          // returns the debounced button state: LOW or HIGH.
+  unsigned int count(); // Returns the number of times the button was pressed.
+  void resetCount();    // Resets the button count number.
+private:
+  byte _button, _state, _lastState, _reading;
+  unsigned int _count;
+  unsigned long _delay, _last;
+  boolean _wait;
+  boolean _invert;
 };
 
 #endif
