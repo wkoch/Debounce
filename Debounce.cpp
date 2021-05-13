@@ -1,43 +1,40 @@
 /*
-  Debounce - v1.1 - November 19, 2014.
+  Debounce - v1.2 - May 12, 2021.
+  MIT Licensed.
+  https://github.com/wkoch/Debounce
+
   Arduino library for button debouncing.
-  Clearly based on the debounce example from the site:
-  http://arduino.cc/en/Tutorial/Debounce
-  Created by William Koch.
-  Released into the public domain.
+  Clearly based on the debounce example from the site: http://arduino.cc/en/Tutorial/Debounce
+  
+  Created by William Koch, improved by the community.
 */
 
 #include "Debounce.h"
 
-// Debounces an input pin.
-// 50ms as default debounce delay.
-Debounce::Debounce(byte button, boolean invert, boolean pullup)
+// Debounces an input with a 50ms debounce by default.
+// Optional parameters:
+//    - Adjust the delay in milliseconds.
+//    - Pull-Up input.
+Debounce::Debounce(byte button, unsigned long delay, boolean pullup)
 {
-  pinMode(button, pullup ? INPUT_PULLUP : INPUT);
+  _invert = false;
+  if (pullup)
+  {
+    pinMode(button, INPUT_PULLUP);
+    _invert = true;
+  }
+  
   _button = button;
-  _delay = 50; // default delay.
-  _state = _lastState = _reading = (invert ^ digitalRead(_button));
+  _delay = delay;
+  _state = _lastState = _reading = (_invert ? !digitalRead(_button) : digitalRead(_button));
   _last = millis();
   _count = 0;
-  _invert = invert;
 }
 
-// Debounces an input pin.
-// Adjustable debounce delay.
-Debounce::Debounce(byte button, unsigned long delay, boolean invert, boolean pullup)
-{
-  pinMode(button, pullup ? INPUT_PULLUP : INPUT);
-  _button = button;
-  _delay = delay; // user defined delay.
-  _state = _lastState = _reading = (invert ^ digitalRead(_button));
-  _last = millis();
-  _count = 0;
-  _invert = invert;
-}
-
+// returns the debounced button state: LOW or HIGH.
 byte Debounce::read()
 {
-  _reading = _invert ^ digitalRead(_button); // get current button state.
+  _reading = (_invert ? !digitalRead(_button) : digitalRead(_button)); // get current button state.
   if (_reading != _lastState)
   {                   // detect edge: current vs last state:
     _last = millis(); // store millis if change was detected.
@@ -64,6 +61,7 @@ unsigned int Debounce::count()
   return _count / 2; // Counts only a full press + release.
 }
 
+// Resets the button count number.
 void Debounce::resetCount()
 {
   _count = 0;
