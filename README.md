@@ -32,7 +32,7 @@ Create a Debounce object for your button, with a custom delay:
 
 Create a Debounce object for your button, with a custom delay and INPUT_PULLUP:
 
-    Debounce Button(4, 80); // 4 is the pin, 80 is the delay, in ms.
+    Debounce Button(4, 80, true); // 4 is the pin, 80 is the delay in ms, true for INPUT_PULLUP.
 
 **Note**: This constructor will change the button input pin to INPUT_PULLUP.
 
